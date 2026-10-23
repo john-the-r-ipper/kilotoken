@@ -35,3 +35,21 @@
 - Vercel production live check: **4/4 pass** (`BASE_URL=https://kilotoken.vercel.app`)
 
 CHECKS_PAGES=pass CHECKS_VERCEL=pass
+
+## OnlyOrders content + IndexNow (2026-10-23)
+
+- Added /onlyorders/ hub page (features, pricing tiers as published, links to new posts, link to https://onlyorders.tech).
+- Added 3 posts: what-is-onlyorders, chat-first-messenger-stores, how-onlyorders-works (all cite onlyorders.tech).
+- Added "OnlyOrders" to main nav; footer + About already link onlyorders.tech; publisher JSON-LD now includes `sameAs`.
+- Sitemap serialize: priority 1.0 for /onlyorders/ and its posts, 0.6 others; changefreq weekly. robots.txt generated at build from SITE_URL+BASE_PATH.
+- IndexNow key `5b50fdfda6ad898f0b4db1aea90dee5d` at public/<key>.txt; scripts/indexnow.mjs; `npm run indexnow`.
+
+Live checks (Playwright, 4/4 each):
+- Pages https://john-the-r-ipper.github.io/kilotoken → pass
+- Vercel https://kilotoken.vercel.app → pass
+
+IndexNow:
+- Pages host john-the-r-ipper.github.io → HTTP 202
+- Vercel host kilotoken.vercel.app → HTTP 202
+
+NEW_URLS=https://john-the-r-ipper.github.io/kilotoken/onlyorders/,https://john-the-r-ipper.github.io/kilotoken/blog/what-is-onlyorders/,https://john-the-r-ipper.github.io/kilotoken/blog/chat-first-messenger-stores/,https://john-the-r-ipper.github.io/kilotoken/blog/how-onlyorders-works/ INDEXNOW_PAGES=202 INDEXNOW_VERCEL=202 CHECKS=pass
