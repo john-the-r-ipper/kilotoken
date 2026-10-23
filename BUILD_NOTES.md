@@ -72,3 +72,10 @@ IndexNow:
 - Vercel host kilotoken.vercel.app → HTTP 200
 
 POLISH: kilotoken checks=pass (pages+vercel 8/8) indexnow=200/200
+
+## Content (2026-10-24)
+
+- Added post: `prompt-caching-llm-cost-latency.md` (developer-tooling, published 2026-10-24). Cites Anthropic prompt-caching docs and OpenAI prompt-caching guide. No invented stats/prices.
+- Build green (21 pages, Pages env). Deploy: Pages workflow + Vercel prod. Live checks both hosts pass.
+
+NEW_URLS=https://john-the-r-ipper.github.io/kilotoken/blog/prompt-caching-llm-cost-latency/ CHECKS=pass
