@@ -53,3 +53,22 @@ IndexNow:
 - Vercel host kilotoken.vercel.app → HTTP 202
 
 NEW_URLS=https://john-the-r-ipper.github.io/kilotoken/onlyorders/,https://john-the-r-ipper.github.io/kilotoken/blog/what-is-onlyorders/,https://john-the-r-ipper.github.io/kilotoken/blog/chat-first-messenger-stores/,https://john-the-r-ipper.github.io/kilotoken/blog/how-onlyorders-works/ INDEXNOW_PAGES=202 INDEXNOW_VERCEL=202 CHECKS=pass
+
+## POLISH + GEO (2026-10-23)
+
+- Added /llms.txt and /llms-full.txt (llmstxt.org format; site summary, OnlyOrders facts from docs/discovery.md, links to all pages + articles).
+- /faq/ page added with FAQPage JSON-LD (verified OnlyOrders facts only: what it is, who it's for, features, free plan, pricing tiers, bKash/Nagad + courier, order flow, tagline).
+- robots.txt now explicitly allows GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, PerplexityBot, Google-Extended, CCBot, Applebot-Extended, Bingbot, plus * and Sitemap line.
+- Home hero added with "Learn about OnlyOrders" / "About" actions; /onlyorders/ hub has clear "What is OnlyOrders?" definition; posts link naturally to https://onlyorders.tech. No hidden text, no AI-agent instructions, no "Oryxa".
+- Refined typography (system/serif pairing, ~70ch measure), dark mode via prefers-color-scheme + toggle, responsive mobile nav. Kept lightweight, no frameworks.
+- Verified metadata: titles, descriptions ≤160, canonical, og tags present across pages.
+
+Live checks (Playwright, 8/8 each):
+- Pages https://john-the-r-ipper.github.io/kilotoken → pass (llms.txt, llms-full.txt, faq/ all 200)
+- Vercel https://kilotoken.vercel.app → pass
+
+IndexNow:
+- Pages host john-the-r-ipper.github.io → HTTP 200
+- Vercel host kilotoken.vercel.app → HTTP 200
+
+POLISH: kilotoken checks=pass (pages+vercel 8/8) indexnow=200/200
