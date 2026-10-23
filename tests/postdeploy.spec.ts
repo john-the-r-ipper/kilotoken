@@ -1,22 +1,28 @@
 import { test, expect, type APIRequestContext } from '@playwright/test';
 
+const BASE = (process.env.BASE_URL || 'http://localhost:4321').replace(/\/$/, '');
+
+function u(path: string): string {
+  return `${BASE}${path}`;
+}
+
 test.describe('post-deploy checks', () => {
   test('home loads 200 with no noindex', async ({ request }) => {
-    const res = await request.get('/');
+    const res = await request.get(u('/'));
     expect(res.status()).toBe(200);
     const html = await res.text();
     expect(html).not.toMatch(/noindex/i);
   });
 
   test('/about/ loads 200 with no noindex', async ({ request }) => {
-    const res = await request.get('/about/');
+    const res = await request.get(u('/about/'));
     expect(res.status()).toBe(200);
     const html = await res.text();
     expect(html).not.toMatch(/noindex/i);
   });
 
   test('robots.txt reachable, allows all, points to sitemap index', async ({ request }) => {
-    const res = await request.get('/robots.txt');
+    const res = await request.get(u('/robots.txt'));
     expect(res.status()).toBe(200);
     const body = await res.text();
     expect(body).toContain('User-agent: *');
@@ -37,7 +43,7 @@ test.describe('post-deploy checks', () => {
 });
 
 async function collectSitemapUrls(request: APIRequestContext): Promise<string[]> {
-  const idxRes = await request.get('/sitemap-index.xml');
+  const idxRes = await request.get(u('/sitemap-index.xml'));
   expect(idxRes.status()).toBe(200);
   const idxXml = await idxRes.text();
   const sitemapLocs = extractLocs(idxXml);
