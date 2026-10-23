@@ -2,9 +2,10 @@
 
 **Blog:** Kilotoken
 **Theme:** AI models, tokens, developer tooling, open-weight models, agent workflows
-**Agent:** Codex CLI (mercury-3 via Inception bridge). Hit HTTP 429 near end; human finished `npm run build` + notes.
+**Agent:** Codex CLI (mercury-3 via Inception bridge)
 **Stack:** Astro 5 + @astrojs/sitemap
-**Site URL (Pages):** https://john-the-r-ipper.github.io/kilotoken/ (via SITE_URL + BASE_PATH=/kilotoken/)
+**Repo:** https://github.com/john-the-r-ipper/kilotoken
+**Pages URL:** https://john-the-r-ipper.github.io/kilotoken/
 
 ## Articles (6)
 
@@ -15,12 +16,11 @@
 5. tokens-for-developers-context-and-cost.md
 6. smb-messaging-automation-chat-orders.md
 
-## Compliance
+## Checks
 
-- About discloses publication by OnlyOrders (onlyorders.tech)
-- Sourced facts; no invented benchmarks
-- No secrets committed
-
-## Build status
-
-See CI / local `npm run build` results in the parent agent report.
+- Local build green: `SITE_URL=https://john-the-r-ipper.github.io BASE_PATH=/kilotoken/ npm run build`
+- GitHub Actions workflow "Deploy GitHub Pages" on `main` completed **success** (run 39976671209)
+- Pages URL live, HTTP 200
+- `/about` discloses publication by OnlyOrders (https://onlyorders.tech); no "Oryxa" anywhere
+- Secret scan clean: no API keys, no sk_, no ghp_, no .env committed
+- `.gitignore` excludes node_modules/, dist/, .astro/, .env*, logs
