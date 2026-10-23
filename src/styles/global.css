@@ -1,0 +1,33 @@
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+a { color: var(--accent2); }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+.top { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; padding-top: 18px; padding-bottom: 18px; border-bottom: 1px solid #ffffff14; }
+.logo { font-weight: 800; font-size: 1.3rem; color: var(--fg); text-decoration: none; background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+nav { display: flex; flex-wrap: wrap; gap: 14px; }
+nav a { color: var(--muted); text-decoration: none; font-size: .95rem; }
+nav a:hover { color: var(--fg); }
+.hero { padding: 40px 0 16px; }
+.hero h1 { font-size: clamp(2rem, 6vw, 3rem); margin: 0; }
+.hero p { color: var(--muted); margin: .3em 0 0; }
+.filters { display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0; }
+.filters input, .filters select { background: var(--card); color: var(--fg); border: 1px solid #ffffff22; border-radius: 8px; padding: 10px 12px; font-size: 1rem; }
+.filters input { flex: 1; min-width: 200px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; margin: 16px 0 40px; }
+.card { background: var(--card); border: 1px solid #ffffff12; border-radius: 14px; padding: 18px; }
+.card h2 { font-size: 1.15rem; line-height: 1.35; margin: .2em 0; }
+.card h2 a { color: var(--fg); text-decoration: none; }
+.card p { color: var(--muted); margin: .4em 0; font-size: .95rem; }
+.meta { font-size: .85rem; color: var(--muted); }
+.meta a { color: var(--accent2); text-decoration: none; }
+.post { max-width: 720px; margin: 30px auto; }
+.post h1 { font-size: clamp(1.7rem, 5vw, 2.4rem); line-height: 1.2; }
+.lede { color: var(--muted); font-size: 1.1rem; }
+.disclosure { border-left: 3px solid var(--accent); padding: 8px 12px; background: var(--card); font-size: .9rem; }
+.prose h2 { margin-top: 1.8em; }
+.prose code { background: var(--card); padding: 2px 5px; border-radius: 4px; }
+.prose pre { background: var(--card); padding: 14px; overflow: auto; border-radius: 8px; }
+.prose table { border-collapse: collapse; width: 100%; display: block; overflow-x: auto; }
+.prose td, .prose th { border: 1px solid #ffffff22; padding: 6px 10px; }
+.sources { border-top: 1px solid #ffffff14; margin-top: 30px; font-size: .92rem; }
+.foot { border-top: 1px solid #ffffff14; padding: 20px; color: var(--muted); font-size: .9rem; }

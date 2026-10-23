@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import Card from '../components/Card.astro';
+import site from '../../site.config.mjs';
+import { posts } from '../lib';
+
+const all = await posts();
+const jsonld = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: site.name,
+  url: Astro.site?.href,
+  publisher: { '@type': 'Organization', name: site.publisher.name, url: site.publisher.url },
+};
+---
+<Base title={site.name} description={site.description} jsonld={jsonld}>
+  <section class="hero">
+    <h1>{site.name}</h1>
+    <p>{site.tagline}</p>
+  </section>
+  <div class="filters">
+    <input id="q" type="search" placeholder="Search articles…" aria-label="Search articles" />
+    <select id="cat" aria-label="Filter by category">
+      <option value="">All categories</option>
+      {Object.entries(site.categories).map(([k, v]) => (
+        <option value={k}>{v}</option>
+      ))}
+    </select>
+  </div>
+  <div class="grid" id="list">{all.map((p) => <Card post={p} />)}</div>
+  <p id="empty" hidden>No articles match.</p>
+  <script is:inline>
+    const q = document.getElementById('q');
+    const c = document.getElementById('cat');
+    const e = document.getElementById('empty');
+    function f() {
+      const s = q.value.toLowerCase().trim();
+      let n = 0;
+      document.querySelectorAll('#list .card').forEach((el) => {
+        const ok = (!c.value || el.dataset.cat === c.value) && (!s || el.dataset.text.includes(s));
+        el.hidden = !ok;
+        if (ok) n++;
+      });
+      e.hidden = n > 0;
+    }
+    q.addEventListener('input', f);
+    c.addEventListener('change', f);
+  </script>
+</Base>

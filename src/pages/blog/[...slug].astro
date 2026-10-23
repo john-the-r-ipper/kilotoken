@@ -1,0 +1,65 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Card from '../../components/Card.astro';
+import site from '../../../site.config.mjs';
+import { posts, url, fmt } from '../../lib';
+
+export async function getStaticPaths() {
+  const all = await posts();
+  return all.map((post) => ({ params: { slug: post.id }, props: { post, all } }));
+}
+
+const { post, all } = Astro.props;
+const { Content } = await render(post);
+const d = post.data;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const related = all
+  .filter((p) => p.id !== post.id && (p.data.category === d.category || p.data.tags.some((t) => d.tags.includes(t))))
+  .slice(0, 3);
+const jsonld = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: d.title,
+  description: d.description,
+  datePublished: d.pubDate.toISOString(),
+  dateModified: (d.updatedDate ?? d.pubDate).toISOString(),
+  mainEntityOfPage: canonical,
+  author: { '@type': 'Organization', name: `${site.name} ${d.author}` },
+  publisher: { '@type': 'Organization', name: site.publisher.name, url: site.publisher.url },
+  articleSection: site.categories[d.category],
+  keywords: d.tags.join(', '),
+  citation: d.sources.map((s) => s.url),
+};
+---
+<Base title={d.title} description={d.description} type="article" jsonld={jsonld}>
+  <article class="post">
+    <p class="meta">
+      <a href={url(`category/${d.category}`)}>{site.categories[d.category]}</a> ·{' '}
+      <time datetime={d.pubDate.toISOString()}>{fmt(d.pubDate)}</time> · {d.author}
+    </p>
+    <h1>{d.title}</h1>
+    <p class="lede">{d.description}</p>
+    {d.mentionsPublisher && (
+      <p class="disclosure">
+        Disclosure: {site.name} is published by the {site.publisher.name} team. This article mentions{' '}
+        {site.publisher.name}.
+      </p>
+    )}
+    <div class="prose"><Content /></div>
+    <section class="sources">
+      <h2>Sources</h2>
+      <ol>
+        {d.sources.map((s) => (
+          <li><a href={s.url} rel="noopener">{s.title}</a></li>
+        ))}
+      </ol>
+    </section>
+  </article>
+  {related.length > 0 && (
+    <section>
+      <h2>Related</h2>
+      <div class="grid">{related.map((p) => <Card post={p} />)}</div>
+    </section>
+  )}
+</Base>

@@ -1,0 +1,64 @@
+---
+import site from '../../site.config.mjs';
+import { url } from '../lib';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  type?: string;
+  jsonld?: object;
+  noindex?: boolean;
+}
+
+const { title, description, type = 'website', jsonld, noindex } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const fullTitle = title === site.name ? `${site.name} — ${site.tagline}` : `${title} | ${site.name}`;
+const t = site.theme;
+---
+<!doctype html>
+<html lang={site.locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={site.name} />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" href={url('favicon.svg').replace(/\/$/, '')} type="image/svg+xml" />
+    <link rel="sitemap" href={url('sitemap-index.xml').replace(/\/$/, '')} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={site.name}
+      href={url('rss.xml').replace(/\/$/, '')}
+    />
+    <style set:html={`:root{--accent:${t.accent};--accent2:${t.accent2};--bg:${t.bg};--fg:${t.fg};--muted:${t.muted};--card:${t.card}}`}></style>
+    {jsonld && <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />}
+  </head>
+  <body>
+    <header class="wrap top">
+      <a class="logo" href={url()}>{site.name}</a>
+      <nav>
+        {Object.entries(site.categories).map(([k, v]) => (
+          <a href={url(`category/${k}`)}>{v}</a>
+        ))}
+        <a href={url('about')}>About</a>
+      </nav>
+    </header>
+    <main class="wrap"><slot /></main>
+    <footer class="wrap foot">
+      <p>
+        © {new Date().getFullYear()} {site.name}. Published by the{' '}
+        <a href={site.publisher.url}>{site.publisher.name}</a> team.{' '}
+        <a href={url('about')}>About &amp; disclosure</a>
+      </p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+---
+import { url, fmt } from '../lib';
+import site from '../../site.config.mjs';
+
+const { post } = Astro.props;
+---
+<article
+  class="card"
+  data-cat={post.data.category}
+  data-text={(post.data.title + ' ' + post.data.description + ' ' + post.data.tags.join(' ')).toLowerCase()}
+>
+  <p class="meta">
+    <a href={url(`category/${post.data.category}`)}>{site.categories[post.data.category]}</a> ·{' '}
+    <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
+  </p>
+  <h2><a href={url(`blog/${post.id}`)}>{post.data.title}</a></h2>
+  <p>{post.data.description}</p>
+</article>

@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import site from '../../site.config.mjs';
+---
+<Base
+  title="About"
+  description={`About ${site.name}: who publishes it, how articles are researched and sourced, and our disclosure policy.`}
+>
+  <article class="post prose">
+    <h1>About {site.name}</h1>
+    <p>
+      {site.name} is a technology publication covering AI models, tokens, developer tooling,
+      open-weight models, and agent workflows. Our goal is to explain these topics clearly for
+      builders who ship software, evaluate models, and run AI systems.
+    </p>
+
+    <h2>Who publishes this site</h2>
+    <p>
+      <strong>{site.name} is published by the team behind <a href="https://onlyorders.tech">OnlyOrders</a></strong>,
+      a multi-channel AI auto-reply and chat-order platform for online sellers. We are an
+      educational content project run by that team — we are not an independent journalism outlet.
+      When an article mentions {site.publisher.name}, it carries a disclosure note.
+    </p>
+
+    <h2>How we write</h2>
+    <ul>
+      <li>Every article lists its sources, preferring primary sources such as official announcements, research posts, and security advisories.</li>
+      <li>We use AI tools to help with research and drafting. A human reviews claims against the sources before publishing.</li>
+      <li>We do not invent benchmarks, prices, statistics, or product capabilities. Vendor claims are attributed to the vendor.</li>
+      <li>Where a topic is speculative or lacks a reliable public source, we say so and frame it as analysis rather than fact.</li>
+      <li>Corrections: if you spot an error, contact the {site.publisher.name} team via <a href={site.publisher.url}>{site.publisher.url}</a>.</li>
+    </ul>
+  </article>
+</Base>

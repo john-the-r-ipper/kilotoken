@@ -1,0 +1,22 @@
+---
+import Base from '../../layouts/Base.astro';
+import Card from '../../components/Card.astro';
+import site from '../../../site.config.mjs';
+import { posts } from '../../lib';
+
+export async function getStaticPaths() {
+  const all = await posts();
+  return Object.keys(site.categories).map((cat) => ({
+    params: { cat },
+    props: { list: all.filter((p) => p.data.category === cat) },
+  }));
+}
+
+const { cat } = Astro.params;
+const { list } = Astro.props;
+const name = site.categories[cat];
+---
+<Base title={name} description={`${name} articles from ${site.name}: ${site.tagline}.`} noindex={list.length === 0}>
+  <h1>{name}</h1>
+  {list.length ? <div class="grid">{list.map((p) => <Card post={p} />)}</div> : <p>No articles yet.</p>}
+</Base>
