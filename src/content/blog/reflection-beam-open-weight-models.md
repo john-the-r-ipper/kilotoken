@@ -1,6 +1,6 @@
 ---
 title: "Reflection, Beam, and the Efficiency Push in Open-Weight Models"
-description: "The 2025–2026 AI community conversation around reflection and beam techniques focuses on doing more with less compute. Here's what that discussion is actually about."
+description: "The 2025–2026 AI community conversation around reflection and beam techniques focuses on doing more with less compute. Here is what that discussion is about."
 pubDate: 2026-03-18
 category: open-models
 tags: ["open-weight", "reflection", "beam", "efficiency", "agents"]

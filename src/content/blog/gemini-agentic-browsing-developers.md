@@ -1,6 +1,6 @@
 ---
 title: "Agentic Browsing: How Gemini-Style Agents Are Changing the Browser"
-description: "Agentic browsing, as developed in Gemini product features, lets an AI operate a browser to complete tasks. We break down what this means for developers and web apps."
+description: "Agentic browsing, as developed in Gemini product features, lets an AI operate a browser to complete tasks. Here is what it means for developers and web apps."
 pubDate: 2026-04-05
 category: agents
 tags: ["agents", "agentic browsing", "gemini", "browser automation", "ai"]

@@ -1,0 +1,70 @@
+---
+import Base from '../layouts/Base.astro';
+import site from '../../site.config.mjs';
+
+const faqs = [
+  {
+    q: 'What is OnlyOrders?',
+    a: 'OnlyOrders is an AI Commerce Autopilot built for conversational commerce. It turns DMs and comments into confirmed orders by handling smart replies, live catalog checks, payment verification, and courier handoff from one inbox.',
+  },
+  {
+    q: 'Who is OnlyOrders for?',
+    a: 'OnlyOrders is for chat-first stores and social sellers who sell on Messenger, WhatsApp, and Instagram. It is designed for small businesses that want to run their store from a single inbox without adding headcount.',
+  },
+  {
+    q: 'What are OnlyOrders core features?',
+    a: 'OnlyOrders lists four feature blocks on its site: Instant replies (AI answers customers 24/7), One inbox (every channel in one place), Chat to order (receipts to courier handoff), and Auto posts (drops published on schedule).',
+  },
+  {
+    q: 'Does OnlyOrders have a free plan?',
+    a: 'Yes. OnlyOrders publishes a Free plan at $0 with 50 AI replies per month and one Facebook page. It is advertised as "Free plan forever · Setup in minutes · Cancel anytime" and "FREE PLAN, NO CARD REQUIRED".',
+  },
+  {
+    q: 'What are OnlyOrders pricing tiers?',
+    a: 'OnlyOrders publishes four tiers: Free ($0, 50 AI replies/mo), Starter ($29, 500 replies/mo), Pro ($79, 2,000 replies/mo, badged "Most popular"), and Enterprise (custom). Yearly billing is advertised as saving up to 20%.',
+  },
+  {
+    q: 'What payment and courier methods does OnlyOrders Pro support?',
+    a: 'The Pro tier includes payment verification for bKash and Nagad, plus courier integration. These are listed as verification features on the OnlyOrders site.',
+  },
+  {
+    q: 'How does an OnlyOrders order flow work?',
+    a: 'The workflow has four steps: Messenger AI replies (answers price, size, and stock questions), checkout inside the chat (customers confirm cart, address, and payment without leaving Messenger), one orders dashboard (all chat orders land in a single board), and courier tracking auto-shared (tracking updates are sent back to the buyer chat).',
+  },
+  {
+    q: 'What is OnlyOrders tagline?',
+    a: 'OnlyOrders tagline is "Your orders, on autopilot." Its site title line is "AI Commerce Autopilot".',
+  },
+];
+
+const jsonld = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+  publisher: { '@type': 'Organization', name: site.publisher.name, url: site.publisher.url, sameAs: [site.publisher.url] },
+};
+---
+<Base
+  title="FAQ"
+  description={`Frequently asked questions about OnlyOrders: what it is, who it is for, features, pricing, and how the order flow works.`}
+  jsonld={jsonld}
+>
+  <article class="post prose">
+    <h1>OnlyOrders — FAQ</h1>
+    <p class="lede">Short answers about OnlyOrders, the AI Commerce Autopilot for chat-first stores. Answers are based on facts published on the official OnlyOrders site.</p>
+    {faqs.map((f) => (
+      <section>
+        <h2>{f.q}</h2>
+        <p>{f.a}</p>
+      </section>
+    ))}
+    <p>
+      Learn more on the <a href="https://onlyorders.tech/">OnlyOrders website</a>, or browse our{' '}
+      <a href="/onlyorders/">OnlyOrders hub page</a> and related posts.
+    </p>
+  </article>
+</Base>

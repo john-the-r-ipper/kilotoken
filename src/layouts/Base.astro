@@ -31,6 +31,7 @@ const t = site.theme;
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content={site.name} />
     <meta name="twitter:card" content="summary" />
+    <meta name="color-scheme" content="light dark" />
     <link rel="icon" href={url('favicon.svg').replace(/\/$/, '')} type="image/svg+xml" />
     <link rel="sitemap" href={url('sitemap-index.xml').replace(/\/$/, '')} />
     <link
@@ -39,19 +40,34 @@ const t = site.theme;
       title={site.name}
       href={url('rss.xml').replace(/\/$/, '')}
     />
-    <style set:html={`:root{--accent:${t.accent};--accent2:${t.accent2};--bg:${t.bg};--fg:${t.fg};--muted:${t.muted};--card:${t.card}}`}></style>
+    <style set:html={`:root{--accent:${t.accent};--accent2:${t.accent2}}`}></style>
+    <script is:inline>
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          if (saved === 'light' || saved === 'dark') {
+            document.documentElement.setAttribute('data-theme', saved);
+          }
+        } catch (e) {}
+      })();
+    </script>
     {jsonld && <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />}
   </head>
   <body>
     <header class="wrap top">
-      <a class="logo" href={url()}>{site.name}</a>
-      <nav>
+      <div class="brandrow">
+        <a class="logo" href={url()}>{site.name}</a>
+        <button class="icon-btn nav-toggle" id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      </div>
+      <nav class="nav-links" id="navLinks">
         {Object.entries(site.categories).map(([k, v]) => (
           <a href={url(`category/${k}`)}>{v}</a>
         ))}
         <a href={url('onlyorders')}>OnlyOrders</a>
+        <a href={url('faq')}>FAQ</a>
         <a href={url('about')}>About</a>
       </nav>
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle dark mode">🌓</button>
     </header>
     <main class="wrap"><slot /></main>
     <footer class="wrap foot">
@@ -61,5 +77,29 @@ const t = site.theme;
         <a href={url('about')}>About &amp; disclosure</a>
       </p>
     </footer>
+    <script is:inline>
+      (function () {
+        var navToggle = document.getElementById('navToggle');
+        var navLinks = document.getElementById('navLinks');
+        if (navToggle && navLinks) {
+          navToggle.addEventListener('click', function () {
+            var open = navLinks.classList.toggle('open');
+            navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+          });
+        }
+        var themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+          themeToggle.addEventListener('click', function () {
+            var current = document.documentElement.getAttribute('data-theme');
+            if (!current) {
+              current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+            var next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            try { localStorage.setItem('theme', next); } catch (e) {}
+          });
+        }
+      })();
+    </script>
   </body>
 </html>
