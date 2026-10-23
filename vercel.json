@@ -1,0 +1,8 @@
+{
+  "build": {
+    "env": {
+      "SITE_URL": "https://kilotoken.vercel.app",
+      "BASE_PATH": "/"
+    }
+  }
+}
