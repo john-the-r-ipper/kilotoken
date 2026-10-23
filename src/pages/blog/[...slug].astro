@@ -26,7 +26,7 @@ const jsonld = {
   dateModified: (d.updatedDate ?? d.pubDate).toISOString(),
   mainEntityOfPage: canonical,
   author: { '@type': 'Organization', name: `${site.name} ${d.author}` },
-  publisher: { '@type': 'Organization', name: site.publisher.name, url: site.publisher.url },
+  publisher: { '@type': 'Organization', name: site.publisher.name, url: site.publisher.url, sameAs: [site.publisher.url] },
   articleSection: site.categories[d.category],
   keywords: d.tags.join(', '),
   citation: d.sources.map((s) => s.url),

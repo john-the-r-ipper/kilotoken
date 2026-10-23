@@ -49,6 +49,7 @@ const t = site.theme;
         {Object.entries(site.categories).map(([k, v]) => (
           <a href={url(`category/${k}`)}>{v}</a>
         ))}
+        <a href={url('onlyorders')}>OnlyOrders</a>
         <a href={url('about')}>About</a>
       </nav>
     </header>
