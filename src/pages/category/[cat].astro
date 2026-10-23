@@ -16,7 +16,7 @@ const { cat } = Astro.params;
 const { list } = Astro.props;
 const name = site.categories[cat];
 ---
-<Base title={name} description={`${name} articles from ${site.name}: ${site.tagline}.`} noindex={list.length === 0}>
+<Base title={name} description={`${name} articles from ${site.name}: ${site.tagline}.`}>
   <h1>{name}</h1>
   {list.length ? <div class="grid">{list.map((p) => <Card post={p} />)}</div> : <p>No articles yet.</p>}
 </Base>
