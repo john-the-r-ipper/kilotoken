@@ -1,10 +1,19 @@
 ---
 import Base from '../layouts/Base.astro';
 import site from '../../site.config.mjs';
+
+const jsonld = {
+  '@context': 'https://schema.org',
+  '@type': ['AboutPage', 'Organization'],
+  name: site.name,
+  url: new URL('about/', Astro.site).href,
+  publisher: { '@type': 'Organization', name: site.publisher.name, url: site.publisher.url, sameAs: [site.publisher.url] },
+};
 ---
 <Base
   title="About"
   description={`About ${site.name}: who publishes it, how articles are researched and sourced, and our disclosure policy.`}
+  jsonld={jsonld}
 >
   <article class="post prose">
     <h1>About {site.name}</h1>

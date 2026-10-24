@@ -8,13 +8,22 @@ const all = await posts();
 const hubPosts = all.filter((p) =>
   ['what-is-onlyorders', 'chat-first-messenger-stores', 'how-onlyorders-works'].includes(p.id)
 );
-const jsonld = {
-  '@context': 'https://schema.org',
-  '@type': 'AboutPage',
-  name: 'OnlyOrders',
-  url: new URL('onlyorders/', Astro.site).href,
-  publisher: { '@type': 'Organization', name: site.publisher.name, url: site.publisher.url, sameAs: [site.publisher.url] },
-};
+const jsonld = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: 'OnlyOrders',
+    url: new URL('onlyorders/', Astro.site).href,
+    publisher: { '@type': 'Organization', name: site.publisher.name, url: site.publisher.url, sameAs: [site.publisher.url] },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: site.publisher.name,
+    url: site.publisher.url,
+    sameAs: [site.publisher.url],
+  },
+];
 ---
 <Base
   title="OnlyOrders"

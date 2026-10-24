@@ -5,13 +5,22 @@ import site from '../../site.config.mjs';
 import { posts } from '../lib';
 
 const all = await posts();
-const jsonld = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: site.name,
-  url: Astro.site?.href,
-  publisher: { '@type': 'Organization', name: site.publisher.name, url: site.publisher.url, sameAs: [site.publisher.url] },
-};
+const jsonld = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: site.name,
+    url: Astro.site?.href,
+    publisher: { '@type': 'Organization', name: site.publisher.name, url: site.publisher.url, sameAs: [site.publisher.url] },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: site.publisher.name,
+    url: site.publisher.url,
+    sameAs: [site.publisher.url],
+  },
+];
 ---
 <Base title={site.name} description={site.description} jsonld={jsonld}>
   <section class="hero">
