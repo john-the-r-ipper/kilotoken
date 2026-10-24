@@ -10,6 +10,10 @@ const AGENTS = [
   'CCBot',
   'Applebot-Extended',
   'Bingbot',
+  'Claude-SearchBot',
+  'Bytespider',
+  'Amazonbot',
+  'meta-externalagent',
 ];
 
 export const GET: APIRoute = ({ site }) => {
