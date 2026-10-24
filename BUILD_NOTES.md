@@ -79,3 +79,7 @@ POLISH: kilotoken checks=pass (pages+vercel 8/8) indexnow=200/200
 - Build green (21 pages, Pages env). Deploy: Pages workflow + Vercel prod. Live checks both hosts pass.
 
 NEW_URLS=https://john-the-r-ipper.github.io/kilotoken/blog/prompt-caching-llm-cost-latency/ CHECKS=pass
+
+## SEO / internal linking (2026-10-24)
+- Added OnlyOrders crosslink box to article template (internal linking to /onlyorders/ hub).
+- Build clean; Pages workflow green; Vercel prod redeployed; check:live pass both hosts; IndexNow run.
