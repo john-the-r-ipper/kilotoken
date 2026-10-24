@@ -16,7 +16,7 @@ export const GET: APIRoute = async ({ site: s }) => {
     })
     .join('');
   return new Response(
-    `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>${esc(site.name)}</title><link>${new URL(base + '/', s).href}</link><description>${esc(site.description)}</description>${items}</channel></rss>`,
+    `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>${esc(site.name)}</title><link>${new URL(base + '/', s).href}</link><description>${esc(site.description)}</description><link rel="hub" href="https://websub.net/hub"/>${items}</channel></rss>`,
     { headers: { 'Content-Type': 'application/xml' } }
   );
 };
